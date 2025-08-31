@@ -3,9 +3,9 @@ date_default_timezone_set('America/Sao_Paulo');
 require_once  "ExceptionLogs.php";
 function getClientAccess(){
     return array(
-        "host" => "162.214.76.190",
-        "user" => "inforparkuser",
-        "pass" => "ASD7N#!a)k6a",
+        "host" => "",
+        "user" => "",
+        "pass" => "",
         "bd" => "inforpark",
         "port"=>3306
     );

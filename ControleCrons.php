@@ -3,9 +3,9 @@
 class ControleCrons
 {
 
-    private $host = "162.214.76.190";
-    private $user = "inforparkuser";
-    private $password = "ASD7N#!a)k6a";
+    private $host = "";
+    private $user = "";
+    private $password = "";
     private $db = "endpointinforcomp";
     private $port = 3306;
     private $charset = 'utf8mb4';
