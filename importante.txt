@@ -1,0 +1,100 @@
+
+echo "Alterando proprietário para 'inforx'..."
+sudo chown -R parkuser /home/parkuser/public_html/public_html/crons/open-close-time.php
+
+echo "Alterando grupo para 'inforx'..."
+sudo chgrp -Rc parkuser /home/parkuser/public_html/public_html/crons/open-close-time.php
+
+echo "Ajustando permissões para 755..."
+sudo chmod -R 755 /home/parkuser/public_html/public_html/crons/open-close-time.php
+
+
+
+
+
+                    
+                    /*
+
+
+
+                    $movimentos=null;
+                    $movimentos = recuperarMovimentoNaoProcessados($contextDinamicoDoBancoSelecionado);
+                    printIf($echos, "-----Recuperando Dados Não Processados (Sensor PROCESSADOS) [" . $baseSelecionada["bd"] . "].  Count(".count($movimentos).")");
+                
+
+    //                dd([$movimento,$repeticao,$entradas,$saidas]);
+                    $portariaCamerasBase=recuperarPortariaECamera($contextDinamicoDoBancoSelecionado);
+                    foreach($portariaCamerasBase as $sensorCamera){
+                        $portariaCameras[]=criarContextoPortariaCamera($sensorCamera);
+                    }
+                    $uuids=array_column($portariaCameras,"uuid");
+                    $placaAnterior=null;
+                    foreach ($movimentos as $movimento) {
+                        printIf($echos, "-----Processados Movimentos das Cameras [" . $baseSelecionada["bd"] . "].");
+                        
+                        $cameraId=$movimento["portatirasensor"];
+                        $portariaId=$movimento["codigosensor"];
+                        $uuid=sprintf("%s%s",$portariaId,$cameraId);
+
+                        //if(is_null($placaAnterior) || $placaAnterior['placa']!=$movimento["placa"]){
+
+                            printIf($echos, "-----Anterior:[".(isset($placaAnterior['placa']) ? $placaAnterior['placa'] :"NULL" )."] Atual[".$movimento["placa"]."]  ");
+                            $placaAnterior=$movimento;
+                            if(in_array($uuid,$uuids)){
+                                $chaveEncontrada=(array_keys($uuids,$uuid))[0];
+                                $cameraSelecionada=$portariaCameras[$chaveEncontrada];
+                                $hasPairs=getRegisterSlotPairCamPlaca($contextDinamicoDoBancoSelecionado,$cameraSelecionada,$movimento["placa"]);
+                                if($cameraSelecionada["sentido"]==ENTRADA){
+                                /// if(is_null($hasPairs)){
+                                        createdRegisterSlotPairCam($contextDinamicoDoBancoSelecionado,$cameraSelecionada,$movimento);
+                                        if(alterarNumerosDeVagasDaPortariaEntada($contextDinamicoDoBancoSelecionado,$cameraSelecionada)){
+                                            alterarMovimentoParaProcessados($contextDinamicoDoBancoSelecionado, $movimento["codigo"]);
+                                        }
+                                //   }
+                            // }else{
+
+                                    if(is_null($hasPairs)){
+                                        $hasPairs=getRegisterSlotPairCamPlaca($contextDinamicoDoBancoSelecionado,$cameraSelecionada,PLACA_INDEFINIDA);
+                                    }
+                                    if(is_array($hasPairs)){
+                                        $hasPairs=$hasPairs[0];
+                                    }
+                                    if(!is_null($hasPairs)){
+
+                                        if(alterarRegisterSlotPairCam($contextDinamicoDoBancoSelecionado,$hasPairs,$cameraSelecionada,$movimento)){
+                                            if(altearNumerosDeVagasDaPortariaSaida($contextDinamicoDoBancoSelecionado,$hasPairs,$cameraSelecionada)){
+                                                alterarMovimentoParaProcessados($contextDinamicoDoBancoSelecionado, $movimento["codigo"]);
+                                            }
+                                        }
+                                    }else{
+                                        $hasPairsIndefinido=getRegisterSlotPairCamDataMinina($contextDinamicoDoBancoSelecionado);
+                                        if(alterarRegisterSlotPairCam($contextDinamicoDoBancoSelecionado,$hasPairsIndefinido,$cameraSelecionada,$movimento)){
+                                            if(altearNumerosDeVagasDaPortariaSaida($contextDinamicoDoBancoSelecionado,$hasPairsIndefinido,$cameraSelecionada)){
+                                                alterarMovimentoParaProcessados($contextDinamicoDoBancoSelecionado, $movimento["codigo"]);
+                                            }
+                                        }
+                                    }
+        
+                                
+        
+                            // }
+                            }else{
+                                printIf($echos, "-----Portaria ou Camera Não Localizados [" . $baseSelecionada["bd"] . "].");
+                            }
+
+                            //Atualizaçoes Gerais
+                            printIf($echos, "------'OK -Movimento COM SUCESSO\n' [" . $movimento["codigosensor"] . "] ) [" . $baseSelecionada["bd"] . "].");
+
+                            
+                    
+                    }else{
+                            printIf($echos, "------'REPETICAO");
+                            $E[]=$movimento;
+                            $placaAnterior=$movimento;
+                            alterarMovimentoParaProcessados($contextDinamicoDoBancoSelecionado, $movimento["codigo"]);
+                            $repeticao++;
+                    }
+                    }
+
+
+                    */
