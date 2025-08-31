@@ -7,9 +7,9 @@
 function getClientAccess(){
     return array(
         "host" => "localhost",
-        "user" => "",
-        "pass" => "",
-        "bd" => "",
+        "user" => "inforparkuser",
+        "pass" => "ASD7N#!a)k6a",
+        "bd" => "inforpark",
         "port"=>3306
     );
 }
