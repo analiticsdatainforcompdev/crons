@@ -7,8 +7,8 @@
 function getClientAccess(){
     return array(
         "host" => "localhost",
-        "user" => "inforparkuser",
-        "pass" => "ASD7N#!a)k6a",
+        "user" => "xxxx",
+        "pass" => "xxxxxxxx",
         "bd" => "inforpark",
         "port"=>3306
     );
@@ -47,3 +47,4 @@ function ConectDataBaseContext($context = null)
     return $conexao;
 
 }
+
